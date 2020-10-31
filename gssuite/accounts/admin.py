@@ -1,9 +1,9 @@
+from django.utils.translation import ugettext, ugettext_lazy as _
 from accounts.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.admin import UserAdmin as UA
 from django.contrib import admin
 from .models import User
 
-from django.utils.translation import ugettext, ugettext_lazy as _
 
 # Register your models here.
 
