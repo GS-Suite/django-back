@@ -26,7 +26,7 @@ SECRET_KEY = ':/'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*",]
 
 
 # Application definition
@@ -45,11 +45,13 @@ INSTALLED_APPS = [
     
     # rest
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -153,17 +155,8 @@ JWT_AUTH = {
     'JWT_AUTH_HEADER_PREFIX': 'Bearer',
     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=9000),
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
-    #'JWT_PAYLOAD_GET_USER_ID_HANDLER': 'rest_framework_jwt.utils.jwt_get_user_id_from_payload_handler',
-    #'JWT_RESPONSE_PAYLOAD_HANDLER': 'rest_framework_jwt.utils.jwt_response_payload_handler',
-    #'JWT_PAYLOAD_HANDLER': 'rest_framework_jwt.utils.jwt_payload_handler',
-    #'JWT_DECODE_HANDLER': 'rest_framework_jwt.utils.jwt_decode_handler',
-    #'JWT_ENCODE_HANDLER': 'rest_framework_jwt.utils.jwt_encode_handler',
-    #'JWT_GET_USER_SECRET_KEY': None,
     #'JWT_VERIFY_EXPIRATION': True,
     #'JWT_PRIVATE_KEY': None,
     #'JWT_AUTH_COOKIE': None,
     #'JWT_PUBLIC_KEY': None,
-    #'JWT_AUDIENCE': None,
-    #'JWT_ISSUER': None,
-    #'JWT_LEEWAY': 0,
 }
