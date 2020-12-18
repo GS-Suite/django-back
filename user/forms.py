@@ -1,32 +1,31 @@
-from django.contrib.auth.forms import UserCreationForm as UCrF
-from django.contrib.auth.forms import UserChangeForm as UChF
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import CustomUser
 from django import forms
-from .models import User
 
 
-class UserCreationForm(UCrF):
-    class Meta(UCrF):
-        model = User
-        fields = ('email', 'name')
+class CustomUserCreationForm(UserCreationForm):
+    class Meta(UserCreationForm):
+        model = CustomUser
+        fields = ('username', 'name')
 
     def __init__(self, *args, **kwargs):
-        super(UserCreationForm, self).__init__(*args, **kwargs)
+        super(CustomUserCreationForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control bg-light'
 
 
-class UserChangeForm(UChF):
+class CustomUserChangeForm(UserChangeForm):
     class Meta:
-        model = User
-        fields = ('email',)
+        model = CustomUser
+        fields = ('username',)
 
 
 class LoginForm(forms.ModelForm):
     password = forms.CharField(widget = forms.PasswordInput())
     
     class Meta:
-        model = User
-        fields = ('email', 'password')
+        model = CustomUser
+        fields = ('username', 'password')
 
     def __init__(self, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)

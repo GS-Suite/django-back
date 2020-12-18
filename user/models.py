@@ -1,26 +1,20 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
-from .managers import UserManager
+from .managers import CustomUserManager
 from django.db import models
 
 # Create your models here.
 
-
-class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(unique = True)
-    username = models.CharField(max_length = 100)
+class CustomUser(AbstractBaseUser, PermissionsMixin):
+    username = models.CharField(max_length = 100, unique = True)
     name = models.CharField(max_length = 100, blank = True)
+    email = models.EmailField()
     is_staff = models.BooleanField(default = False)
     is_active = models.BooleanField(default = True)
     date_joined = models.DateTimeField(auto_now = True)
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'username'
 
-    objects = UserManager()
+    objects = CustomUserManager()
 
     def __str__(self):
         return self.name
-
-
-# Create your models here.
-
-

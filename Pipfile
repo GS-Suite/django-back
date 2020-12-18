@@ -8,6 +8,10 @@ verify_ssl = true
 [packages]
 django = "*"
 djangorestframework = "*"
+djangorestframework-jwt = "*"
+django-cors-headers = "*"
+numpy = "==1.18.5"
+pandas = "*"
 
 [requires]
 python_version = "3.8"
