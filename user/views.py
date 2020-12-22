@@ -15,8 +15,12 @@ class SignUp(APIView):
 
         if form.is_valid():
             form.save()
-        
-        return Response(form.is_valid())
+        #print(form.errors)
+        response = {
+            "result": form.is_valid(),
+            "errors": form.errors
+        }
+        return Response(response)
 
         '''
         {
