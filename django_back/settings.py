@@ -39,6 +39,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'gstestsuite.herokuapp.com',
     "*",
+    "gstestreact.herokuapp.com",
 ]
 
 
@@ -180,6 +181,7 @@ JWT_AUTH = {
 }
 
 CORS_ALLOWED_ORIGINS = [
+    "https://gstestreact.herokuapp.com/",
     "http://localhost:3000",
     "http://*",
     "https://*",
