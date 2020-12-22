@@ -12,6 +12,9 @@ djangorestframework-jwt = "*"
 django-cors-headers = "*"
 numpy = "==1.18.5"
 pandas = "*"
+django-heroku = "*"
+gunicorn = "*"
+whitenoise = "*"
 
 [requires]
 python_version = "3.8"

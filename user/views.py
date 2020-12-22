@@ -15,7 +15,7 @@ class SignUp(APIView):
 
         if form.is_valid():
             form.save()
-        #print(form.errors)
+        #pipprint(form.errors)
         response = {
             "result": form.is_valid(),
             "errors": form.errors
