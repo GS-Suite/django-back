@@ -12,12 +12,17 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import django_heroku
+import dj_database_url
+import dotenv
 import datetime
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -28,7 +33,12 @@ SECRET_KEY = 'Xc3igKfrJC33-1qkyI6Q53V64Zvd4twtSZeA2Lf;QJET'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    '0.0.0.0', 
+    'localhost', 
+    '127.0.0.1',
+    'gstestsuite.herokuapp.com'
+]
 
 
 # Application definition
@@ -83,13 +93,8 @@ WSGI_APPLICATION = 'django_back.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -130,6 +135,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ### set CustomUser as User model
 AUTH_USER_MODEL = 'user.CustomUser'
@@ -178,3 +185,7 @@ CORS_ALLOWED_ORIGINS = [
 
 
 django_heroku.settings(locals())
+
+
+options = DATABASES['default'].get('OPTIONS', {})
+options.pop('sslmode', None)
